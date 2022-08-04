@@ -3,11 +3,10 @@ import { trpc } from "../../utils/trpc";
 
 const GetAll: NextPage = () => {
     const slugs = trpc.useQuery(["all"], {
-        refetchOnReconnect: true, // replacement for enable: false which isn't respected.
-        refetchOnMount: true,
+        refetchOnReconnect: false, // replacement for enable: false which isn't respected.
+        refetchOnMount: false,
         refetchOnWindowFocus: false,
     });
-    console.log("🚀 ~ file: getAll.tsx ~ line 10 ~ slugs", slugs)
     if (slugs.isLoading || slugs.isIdle) {
         return <h1>Loading...</h1>;
     }

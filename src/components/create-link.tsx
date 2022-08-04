@@ -15,12 +15,17 @@ const CreateLinkForm: NextPage = () => {
     const [form, setForm] = useState<Form>({ slug: "", url: "" });
     const url = window.location.origin;
 
+    const getAllSlugs = trpc.useQuery(['all']);
     const slugCheck = trpc.useQuery(["slugCheck", { slug: form.slug }], {
         refetchOnReconnect: false, // replacement for enable: false which isn't respected.
         refetchOnMount: false,
         refetchOnWindowFocus: false,
     });
-    const createSlug = trpc.useMutation(["createSlug"]);
+    const createSlug = trpc.useMutation(["createSlug"], {
+        onSuccess: () => {
+            getAllSlugs.refetch();
+        }
+    });
 
     const input =
         "text-black my-1 p-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-pink-500 focus:ring-pink-500 block w-full rounded-md sm:text-sm focus:ring-1";
