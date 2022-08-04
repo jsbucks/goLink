@@ -34,9 +34,9 @@ const GetAll: NextPage = () => {
                 <tbody>
                     {slugs.data.map(slug => {
                         return (
-                            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <tr key={slug.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                 <td className="py-4 px-6">{slug.url}</td>
-                                <td className="py-4 px-6">{slug.slug}</td>
+                                <td className="py-4 px-6  text-blue-600"><a href={`/${slug.slug}`}>{slug.slug}</a> </td>
                                 <td className="py-4 px-6">{new Date(slug.createdAt).toDateString()}</td>
                             </tr>
                         )
